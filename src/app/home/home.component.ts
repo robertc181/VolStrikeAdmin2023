@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(private homeService: HomeService) {}
 
   ngOnInit(): void {
-    debugger;
+    // debugger;
     this.loginForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
