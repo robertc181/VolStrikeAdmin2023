@@ -1,5 +1,5 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HomeService } from './home.service';
 
@@ -9,12 +9,14 @@ import { HomeService } from './home.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  @Input() showFormspaceComponent: boolean = false;
+
   loginForm!: FormGroup;
 
   constructor(private homeService: HomeService) {}
 
   ngOnInit(): void {
-    // debugger;
+    debugger;
     this.loginForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
