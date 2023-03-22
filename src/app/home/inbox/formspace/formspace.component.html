@@ -4,9 +4,10 @@
       <span class="fs-6 fw-semibold text-center ">John Meany - JohnMeany@gmail.com</span>
       <span class="fs-6 fw-semibold text-center ms-auto text-primary">Process</span>
     </a>
-    <div class="list-group list-group-flush border-bottom scrollarea"
+    <div  *ngFor="let singleForm of Form" class="list-group list-group-flush border-bottom scrollarea"
       style="max-height: calc(100vh - 114px); overflow-y: scroll;">
-      <form class="col-md-8 mx-auto pt-4 mb-4">
+      <h2>{{ singleForm._id }}</h2>
+      <!-- <form class="col-md-8 mx-auto pt-4 mb-4">
         <h2 class="text-center mr-auto ms-auto">John Meany</h2>
         <div class="mb-3">
           <label for="question1" class="form-label">Question 1:</label>
@@ -41,6 +42,6 @@
           <input type="text" class="form-control" id="question5">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+      </form> -->
     </div>
   </div>

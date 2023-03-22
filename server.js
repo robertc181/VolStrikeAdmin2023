@@ -3,9 +3,6 @@ var bodyParser = require("body-parser");
 var path = require("path");
 const { MongoClient } = require("mongodb");
 
-var DATABASE_NAME = "employees";
-var CONTACTS_COLLECTION = "records";
-
 var app = express();
 app.use(bodyParser.json());
 
@@ -30,15 +27,33 @@ function handleError(res, reason, message, code) {
   res.status(code || 500).json({ error: message });
 }
 
-/*  "/api/contacts"
- *    GET: finds all contacts
- *    POST: creates a new contact
- */
-
 app.get("/api/requests", function (req, res) {
-  getRequests().catch((data) => {
-    return data;
-  });
+  (async () => {
+    docs = await getRequests();
+    res.status(200).json(docs);
+  })();
+});
+
+app.put("/api/request/:id", function (req, res) {
+  (async () => {
+    success = await updateRequest(req._id);
+    if (success.modifiedCount === 1) {
+      res.status(200);
+    } else {
+      handleError(res, err.message, "Failed to update request.");
+    }
+  })();
+});
+
+app.delete("/api/request/:id", function (req, res) {
+  (async () => {
+    success = await deleteRequest(req._id);
+    if (success.deletedCount === 1) {
+      res.status(200);
+    } else {
+      handleError(res, err.message, "Failed to delete request.");
+    }
+  })();
 });
 
 async function getRequests() {
@@ -64,7 +79,36 @@ async function getRequests() {
     console.log(err.stack);
   } finally {
     await client.close();
-    console.log(recs);
     return recs;
+  }
+}
+
+async function updateRequest(id) {
+  try {
+    await client.connect();
+    const db = client.db("strike_offs");
+    const col = db.collection("requests");
+
+    const resp = col.updateOne({ _id: id }, { $set: { processed: true } });
+    return resp;
+  } catch (err) {
+    console.log(err.stack);
+  } finally {
+    await client.close();
+  }
+}
+
+async function deleteRequest(id) {
+  try {
+    await client.connect();
+    const db = client.db("strike_offs");
+    const col = db.collection("requests");
+
+    const resp = col.remove({ _id: id }, true);
+    return resp;
+  } catch (err) {
+    console.log(err.stack);
+  } finally {
+    await client.close();
   }
 }
