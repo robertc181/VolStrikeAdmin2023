@@ -16,10 +16,11 @@ export class ApiService {
   }
 
   public updateRequest(id: string): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/request/${id}`, {});
+    console.log(id, "rrrykuyfluyfluyfuyfluyf")
+    return this.http.put<any>(`${this.baseUrl}/request${id}`, id);
   }
 
   public deleteRequest(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/request/${id}`);
+    return this.http.delete<any>(`${this.baseUrl}/request/:${id}`);
   }
 }

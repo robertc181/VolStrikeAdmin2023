@@ -33,7 +33,10 @@
       </a>
       <div class="row infobox">
         <!-- *ngIf="showFormspaceComponent" -->
-        <app-formspace [Form]="openForm"></app-formspace>
+        <app-formspace 
+          [Form]="openForm"
+          (processedEmitter)="handleProcessedForm($event)">
+        </app-formspace>
 
       </div>
     </div>

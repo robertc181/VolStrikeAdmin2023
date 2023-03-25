@@ -73,11 +73,14 @@ export class HomeComponent implements OnInit {
   }
 
   handleFormId(formId: string) {
-    console.log(`Received formId: ${formId}`);
       this.apiService.getRequests().subscribe((data: any[]) => {
       this.openForm = data.filter(request => request._id === formId);
-      console.log(this.openForm);
+    });
+  }
 
+  handleProcessedForm(processedForm: any) {
+    this.apiService.updateRequest(processedForm[0].unid).subscribe((data: any[]) => {
+      console.log(data);
     });
   }
 

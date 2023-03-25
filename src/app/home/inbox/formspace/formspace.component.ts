@@ -1,24 +1,32 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-formspace',
   templateUrl: './formspace.component.html',
   styleUrls: ['./formspace.component.scss']
 })
-export class FormspaceComponent implements OnInit, AfterViewInit {
+export class FormspaceComponent implements OnInit {
 
   @Input() Form: any;
+  @Output() processedEmitter = new EventEmitter<any>();
+
+  processedForm: any[] = []
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.log("ttttttttttttttttttttttt")
-    console.log(this.Form)
+  // function processFile() {
+    
+  // }
+
+  processFile (singleForm: any) {
+    // singleForm.processed = true
+    this.processedForm.push(singleForm);
+    this.processedEmitter.emit(this.processedForm);
   }
 
-  ngAfterViewInit(): void {
-    console.log("etehgdjdjjjfbv;eifvb;edfjbv;fdjnb")
-    console.log(this.Form)
+  ngOnInit(): void {
   }
+
+
 
 }

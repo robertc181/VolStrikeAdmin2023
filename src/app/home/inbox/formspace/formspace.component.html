@@ -1,13 +1,72 @@
-<div class="formspace bg-light">
-    <a href="/" style="margin-right: 14px"
-      class="form-info-head d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none">
-      <span class="fs-6 fw-semibold text-center ">John Meany - JohnMeany@gmail.com</span>
-      <span class="fs-6 fw-semibold text-center ms-auto text-primary">Process</span>
-    </a>
-    <div  *ngFor="let singleForm of Form" class="list-group list-group-flush border-bottom scrollarea"
-      style="max-height: calc(100vh - 114px); overflow-y: scroll;">
-      <h2>{{ singleForm._id }}</h2>
-      <!-- <form class="col-md-8 mx-auto pt-4 mb-4">
+<div class="formspace bg-light" *ngFor="let singleForm of Form">
+  <a href="javascript:void(0)" style="margin-right: 14px"
+    class="form-info-head d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none">
+    <span class="fs-6 fw-semibold text-center ">{{ singleForm.fullName }} - {{ singleForm.emailAddress
+      }}</span>
+    <span (click)="processFile(singleForm)" class="fs-6 fw-semibold text-center ms-auto text-primary">Process</span>
+  </a>
+  <div class="list-group list-group-flush border-bottom scrollarea mr-auto"
+    style="max-height: calc(100vh - 114px); overflow-y: scroll;">
+    <div class="row justify-content-center">
+      <div class="col-sm-6 mt-4 mb-4 mr-auto">
+        <p>_id: {{ singleForm._id }}</p>
+        <p>unid: {{ singleForm.unid }}</p>
+        <p>busAddress1: {{ singleForm.busAddress1 }}</p>
+        <p>assetsExceed150: {{ singleForm.assetsExceed150 }}</p>
+        <p>authority: {{ singleForm.authority }}</p>
+        <p>busAddress2: {{ singleForm.busAddress2 }}</p>
+        <p>busCity: {{ singleForm.busCity }}</p>
+        <p>busCountry: {{ singleForm.busCountry }}</p>
+        <p>busPostalCode: {{ singleForm.busPostalCode }}</p>
+        <p>busRegion: {{ singleForm.busRegion }}</p>
+        <p>ceasedTradingDate: {{ singleForm.ceasedTradingDate }}</p>
+        <p>companyName: {{ singleForm.companyName }}</p>
+        <p>companyNoLongerTrading: {{ singleForm.companyNoLongerTrading }}</p>
+        <p>companyTaxNumber: {{ singleForm.companyTaxNumber }}</p>
+        <p>croNumber: {{ singleForm.croNumber }}</p>
+        <p>deRegistered: {{ singleForm.deRegistered }}</p>
+        <p>difAddress: {{ singleForm.difAddress }}</p>
+        <p>emailAddress: {{ singleForm.emailAddress }}</p>
+        <p>fullName: {{ singleForm.fullName }}</p>
+        <p>letterAssistance: {{ singleForm.letterAssistance }}</p>
+        <p>letterOfNoObjection: {{ singleForm.letterOfNoObjection }}</p>
+        <p>liabilitiesExceed150: {{ singleForm.liabilitiesExceed150 }}</p>
+        <p>nameChanged: {{ singleForm.nameChanged }}</p>
+        <p>ongoingLitigation: {{ singleForm.ongoingLitigation }}</p>
+        <p>person: {{ singleForm.person }}</p>
+        <p>phone: {{ singleForm.phone }}</p>
+        <p>prevAddress1: {{ singleForm.prevAddress1 }}</p>
+        <p>prevAddress2: {{ singleForm.prevAddress2 }}</p>
+        <p>prevCity: {{ singleForm.prevCity }}</p>
+        <p>prevCountry: {{ singleForm.prevCountry }}</p>
+        <p>prevPostalCode: {{ singleForm.prevPostalCode }}</p>
+        <p>prevRegion: {{ singleForm.prevRegion }}</p>
+        <p>prevRegisterOffice: {{ singleForm.prevRegisterOffice }}</p>
+        <p>previousCompanyName: {{ singleForm.previousCompanyName }}</p>
+        <p>previouslyTraded: {{ singleForm.previouslyTraded }}</p>
+        <p>registeredAddress1: {{ singleForm.registeredAddress1 }}</p>
+        <p>registeredAddress2: {{ singleForm.registeredAddress2 }}</p>
+        <p>registeredBusName: {{ singleForm.registeredBusName }}</p>
+        <p>registeredCity: {{ singleForm.registeredCity }}</p>
+        <p>registeredCountry: {{ singleForm.registeredCountry }}</p>
+        <p>registeredForTaxes: {{ singleForm.registeredForTaxes }}</p>
+        <p>registeredPostalCode: {{ singleForm.registeredPostalCode }}</p>
+        <p>registeredRegion: {{ singleForm.registeredRegion }}</p>
+        <p>returnsUpToDate: {{ singleForm.returnsUpToDate }}</p>
+        <p>serv: {{ singleForm.serv }}</p>
+        <p>strikeOffBy: {{ singleForm.strikeOffBy }}</p>
+        <p>strikeOffByFirstName: {{ singleForm.strikeOffByFirstName }}</p>
+        <p>strikeOffByLastName: {{ singleForm.strikeOffByLastName }}</p>
+        <p>tandcAgreed: {{ singleForm.tandcAgreed }}</p>
+        <p>taxReturnSubmitted: {{ singleForm.taxReturnSubmitted }}</p>
+        <p>taxesPaid: {{ singleForm.taxesPaid }}</p>
+        <p>tradingAs: {{ singleForm.tradingAs }}</p>
+        <p>_id: {{ singleForm._id }}</p>
+      </div>
+    </div>
+    
+
+    <!-- <form class="col-md-8 mx-auto pt-4 mb-4">
         <h2 class="text-center mr-auto ms-auto">John Meany</h2>
         <div class="mb-3">
           <label for="question1" class="form-label">Question 1:</label>
@@ -43,5 +102,5 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form> -->
-    </div>
   </div>
+</div>
