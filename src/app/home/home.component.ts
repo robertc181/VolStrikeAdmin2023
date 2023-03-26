@@ -24,8 +24,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private homeService: HomeService,
-    private apiService: ApiService 
-  ){}
+    private apiService: ApiService
+  ) { }
 
   ngOnInit(): void {
 
@@ -51,7 +51,8 @@ export class HomeComponent implements OnInit {
     this.apiService.getRequests().subscribe((data: any[]) => {
       this.forms = data.filter(request => !('processed' in request) || request.processed === false);
       this.title = 'Unprocessed'
-      this.message = ''; 
+      this.message = '';
+      this.openForm = []
     });
   }
 
@@ -62,27 +63,60 @@ export class HomeComponent implements OnInit {
       this.forms = filteredRequests;
       this.title = 'Processed'
 
-    if (filteredRequests.length > 0) {
-      this.message = ''; 
-      // clear the message if there are processed requests
-    } else {
-      this.message = "There are no processed files"
-      // Do something with the message, e.g. display it in the UI
-    }
+      if (filteredRequests.length > 0) {
+        this.message = '';
+        // clear the message if there are processed requests
+      } else {
+        this.message = "There are no processed files"
+        // Do something with the message, e.g. display it in the UI
+      }
     });
   }
 
-  handleFormId(formId: string) {
-      this.apiService.getRequests().subscribe((data: any[]) => {
-      this.openForm = data.filter(request => request._id === formId);
-    });
-  }
+  getFormId(formId: string) {
+    this.apiService.getRequests().subscribe((data: any[]) => {
+    this.openForm = data.filter(request => request._id === formId);
+  });
+}
 
-  handleProcessedForm(processedForm: any) {
+  updateForm(processedForm: any) {
     this.apiService.updateRequest(processedForm[0].unid).subscribe((data: any[]) => {
       console.log(data);
     });
+    this.openForm = []
+    this.openUnprocessed()
   }
+
+  deleteForm(unid: any){
+    console.log("unidunidundiundi");
+
+    console.log(unid);
+    this.apiService.deleteRequest(unid).subscribe((data: any[]) => {
+      console.log("datadatdatdat");
+
+      console.log(data);
+    });
+    this.openForm = []
+    this.openUnprocessed()
+  }
+
+  // nav item hover btns 
+
+  // links:  NodeListOf<Element> = document.querySelectorAll(".nav-link");
+
+  // changelinks() {
+  //   this.links.forEach((link: HTMLElement) => {
+  //     link.addEventListener("click", (e: Event) => {
+  //       e.preventDefault();
+  //       this.links.forEach((link) => {
+  //         link.classList.remove("active");
+  //       });
+  //       link.classList.add("active");
+  //     });
+  //   });
+  // }
+
+  
 
   get nameField(): any {
     return this.loginForm.get('name');

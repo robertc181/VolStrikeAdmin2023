@@ -50,4 +50,18 @@ app-formspace {
   .scroller-title{
     border-bottom: 1px solid #f1f1f1;
   }
+
+  
+  .nav-item .nav-link {
+    color: rgb(199, 199, 199);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .nav-item a:hover,
+  .nav-item a:focus,
+  .nav-item a:active {
+    color: #ffffff;
+    text-decoration: none;
+  }
   

@@ -7,12 +7,12 @@
         </a>
         <ul class="nav nav-pills flex-column mb-auto" style="margin-top: 10px">
           <li class="nav-item">
-            <a href="javascript:void(0)" (click)="openUnprocessed()" class="nav-link text-white">
+            <a href="javascript:void(0)" (click)="openUnprocessed()" class="nav-link">
               Unprocessed
             </a>
           </li>
-          <li>
-            <a href="javascript:void(0)" (click)="openProcessed()" class="nav-link text-white">
+          <li class="nav-item">
+            <a href="javascript:void(0)" (click)="openProcessed()" class="nav-link">
               Processed
             </a>
           </li>
@@ -24,7 +24,8 @@
         [Forms]="forms" 
         [Message]="message"
         [Title]="title"
-        (formIdEmitter)="handleFormId($event)">
+        (formIdEmitter)="getFormId($event)"
+        (deleteIdEmitter)="deleteForm($event)">
       </app-inbox>
     </div>
     <div class="col-sm-0 col-md-7 col-lg-7 d-none d-md-block">
@@ -35,7 +36,7 @@
         <!-- *ngIf="showFormspaceComponent" -->
         <app-formspace 
           [Form]="openForm"
-          (processedEmitter)="handleProcessedForm($event)">
+          (processedEmitter)="updateForm($event)">
         </app-formspace>
 
       </div>

@@ -10,9 +10,13 @@ export class InboxComponent implements OnInit, AfterViewInit {
   @Input() Message: any;
   @Input() Title: any;
 
-  @Output() formIdEmitter = new EventEmitter<string>();
+  @Output() formIdEmitter = new EventEmitter<any>();
+  @Output() deleteIdEmitter = new EventEmitter<any>();
+
+
 
   public formId: string = '';
+  // public processed: string = '';
   selectedFormId: string = '';
 
   constructor() { 
@@ -20,10 +24,14 @@ export class InboxComponent implements OnInit, AfterViewInit {
   }
 
 
-  openforms(_id: any) {
+  openforms(_id: string) {
     this.formId = _id;
     this.selectedFormId = this.formId;
     this.formIdEmitter.emit(_id);
+  }
+
+  deleteForm(Form: any) {
+    this.deleteIdEmitter.emit(Form.unid);
   }
 
 

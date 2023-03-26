@@ -1,8 +1,11 @@
 <div class=" bg-white" style="height:100vh;">
     <a href="javascript:void(0)" class="scroller-title d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none">
-      <span class="fs-6 fw-semibold text-center">{{ Title }}  {{ Message }}</span>
+      <span class="fs-6 fw-semibold text-center">{{ Title }}</span>
     </a>
-    <div class="list-group list-group-flush border-bottom scrollarea" 
+    <div *ngIf="Forms.length === 0" class="d-flex justify-content-center align-items-center" style="height: calc(100vh - 60px); border-right: solid 1px #f1f1f1;">
+      <span class="fs-5 text-muted">No forms found</span>
+    </div>
+    <div class="list-group list-group-flush scrollarea" 
     style="max-height: calc(100vh - 60px); overflow-y: scroll;">
     
         <a *ngFor="let Form of Forms" (click)="openforms(Form._id)" href="javascript:void(0)" 
@@ -11,8 +14,47 @@
             <strong class="mb-1">{{ Form.emailAddress }}</strong>
             <small class="">Tues</small>
           </div>
-          <div class="col-10 mb-1 small"> {{ Form.fullName }} - {{ Form.companyName }}</div>
-          <div class="col-10 mb-1 small">Contact Number: {{ Form.phone }}</div>
+          <div class="col-10 mb-1 small"> {{ Form.fullName }} - {{ Form.companyName }}    {{ Form.proccesed }}</div>
+          <div class="d-flex w-100 align-items-center justify-content-between">
+            <div class="col-10 mb-1 small">Contact Number: {{ Form.phone }}</div>
+            <small class="mb-1">
+              <span class="ml-auto mr-3 delete-btn" (click)="deleteForm(Form)">
+                <i class="fa fa-trash"></i>
+              </span>
+            </small>
+          </div>
+        </a>
+        <a *ngFor="let Form of Forms" (click)="openforms(Form._id)" href="javascript:void(0)" 
+        class="list-group-item list-group-item-action py-3 lh-tight mr-3" [class.active-link]="Form._id === selectedFormId">
+          <div class="d-flex w-100 align-items-center justify-content-between">
+            <strong class="mb-1">{{ Form.emailAddress }}</strong>
+            <small class="">Tues</small>
+          </div>
+          <div class="col-10 mb-1 small"> {{ Form.fullName }} - {{ Form.companyName }}    {{ Form.proccesed }}</div>
+          <div class="d-flex w-100 align-items-center justify-content-between">
+            <div class="col-10 mb-1 small">Contact Number: {{ Form.phone }}</div>
+            <small class="mb-1">
+              <span class="ml-auto mr-3 delete-btn" (click)="deleteForm(Form)">
+                <i class="fa fa-trash"></i>
+              </span>
+            </small>
+          </div>
+        </a>
+        <a *ngFor="let Form of Forms" (click)="openforms(Form._id)" href="javascript:void(0)" 
+        class="list-group-item list-group-item-action py-3 lh-tight mr-3" [class.active-link]="Form._id === selectedFormId">
+          <div class="d-flex w-100 align-items-center justify-content-between">
+            <strong class="mb-1">{{ Form.emailAddress }}</strong>
+            <small class="">Tues</small>
+          </div>
+          <div class="col-10 mb-1 small"> {{ Form.fullName }} - {{ Form.companyName }}    {{ Form.proccesed }}</div>
+          <div class="d-flex w-100 align-items-center justify-content-between">
+            <div class="col-10 mb-1 small">Contact Number: {{ Form.phone }}</div>
+            <small class="mb-1">
+              <span class="ml-auto mr-3 delete-btn" (click)="deleteForm(Form)">
+                <i class="fa fa-trash"></i>
+              </span>
+            </small>
+          </div>
         </a>
         <a *ngFor="let Form of Forms" (click)="openforms(Form._id)" href="javascript:void(0)" 
         class="list-group-item list-group-item-action py-3 lh-tight mr-3" [class.active-link]="Form._id === selectedFormId">
