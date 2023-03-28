@@ -1,106 +1,432 @@
 <div class="formspace bg-light" *ngFor="let singleForm of Form">
-  <a href="javascript:void(0)" style="margin-right: 14px"
-    class="form-info-head d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none">
-    <span class="fs-6 fw-semibold text-center ">{{ singleForm.fullName }} - {{ singleForm.emailAddress }}</span>
-      <span *ngIf="!singleForm.processed" (click)="processFile(singleForm)" class="fs-6 fw-semibold text-center ms-auto text-primary">Process</span>
+  <a
+    href="javascript:void(0)"
+    style="margin-right: 14px"
+    class="form-info-head d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none"
+  >
+    <span class="fs-6 fw-semibold text-center"
+      >{{ singleForm.fullName }} - {{ singleForm.emailAddress }}</span
+    >
+    <span
+      *ngIf="!singleForm.processed"
+      (click)="processFile(singleForm)"
+      class="fs-6 fw-semibold text-center ms-auto text-primary"
+      >Process</span
+    >
+    <span
+      *ngIf="singleForm.processed"
+      (click)="deleteForm(Form)"
+      class="fs-6 fw-semibold delete-btn text-center ms-auto"
+    >
+      <i class="fa fa-trash"></i>
+    </span>
   </a>
-  <div class="list-group list-group-flush border-bottom scrollarea mr-auto"
-    style="max-height: calc(100vh - 114px); overflow-y: scroll;">
-     <div class="container mt-5">
-      <div class="row mx-auto align-items-center justify-content-center ">
+  <div
+    class="list-group list-group-flush border-bottom scrollarea mr-auto"
+    style="max-height: calc(100vh - 114px); overflow-y: scroll"
+  >
+    <div class="container mt-5">
+      <div class="row mx-auto align-items-center justify-content-center">
         <div class="col-md-8 mr-auto text-center mb-5">
           <h1 class="fw-bold">{{ singleForm.companyName }}</h1>
-          <h4 class="fw-bold" style="color: rgb(53, 53, 53); font-size: 25px;">{{ singleForm.fullName }}</h4>
-          <hr>
+          <h4 class="fw-bold" style="color: rgb(53, 53, 53); font-size: 25px">
+            {{ singleForm.fullName }}
+          </h4>
+          <hr />
         </div>
         <div class="col-md-8 mr-auto mb-5">
-          <h3 class="fw-bold mr-auto text-center" style="color: rgb(53, 53, 53); font-size: 20px;">Details of Advertisement Placer</h3>
-          <hr>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Role: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.person }}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Full Name: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.fullName }}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Address: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.address }}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Phone Number: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.phone }}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Email Address: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.emailAddress }}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Has Authority: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.authority }}</span></p>
-        </div>
-        <div class="col-md-8 mr-auto mb-5 ">
-          <h3 class="fw-bold mr-auto text-center" style="color: rgb(53, 53, 53); font-size: 20px;">Details of Company to be Struck Off</h3>
-          <hr>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Company Name: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.companyName }}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">CRO Number: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.croNumber }}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Has Company Name Changed: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.nameChanged }}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Previous company name: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.previousCompanyName }}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Registered Trading As: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.tradingAs}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Registered Business Name: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.registeredBusName}}</span></p>
-        </div>
-        <div class="col-md-8 mr-auto mb-5">
-          <h3 class="fw-bold mr-auto text-center" style="color: rgb(53, 53, 53); font-size: 20px;">Registered Office-</h3>
-          <hr>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Street address: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.registeredAddress1}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Address line 2: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.registeredAddress2}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Region: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.registeredRegion}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">City: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.registeredCity}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Postal code: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.registeredPostalCode}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Country: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.registeredCountry}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Registered Business Name: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.prevRegisterOffice}}</span></p>
-        </div>
-        <div class="col-md-8 mr-auto mb-5">
-          <h3 class="fw-bold mr-auto text-center" style="color: rgb(53, 53, 53); font-size: 20px;">Previous Registered Office-</h3>
-          <hr>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Street address: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.prevAddress1}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Address line 2: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.prevAddress2}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Region: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.prevRegion}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">City: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.prevCity}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Postal code: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.prevPostalCode}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Country: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.prevCountry}}</span></p>
-        </div>
-        <div class="col-md-8 mr-auto mb-5">
-          <h3 class="fw-bold mr-auto text-center" style="color: rgb(53, 53, 53); font-size: 20px;">Business Address-</h3>
-          <hr>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Business Address dif to Registered Address: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.difAddress}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Street address: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.busAddress1}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Address line 2:  </span><span style="color: rgb(31, 31, 31);">{{ singleForm.busAddress2}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Region: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.busRegion}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">City: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.busCity}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Postal code: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.busPostalCode}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Country: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.busCountry}}</span></p>
+          <h3
+            class="fw-bold mr-auto text-center"
+            style="color: rgb(53, 53, 53); font-size: 20px"
+          >
+            Details of Advertisement Placer
+          </h3>
+          <hr />
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Role: </span
+            ><span style="color: rgb(31, 31, 31)">{{ singleForm.person }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Full Name: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.fullName
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Address: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.address
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Phone Number: </span
+            ><span style="color: rgb(31, 31, 31)">{{ singleForm.phone }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Email Address: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.emailAddress
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Has Authority: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.authority
+            }}</span>
+          </p>
         </div>
         <div class="col-md-8 mr-auto mb-5">
-          <h3 class="fw-bold mr-auto text-center" style="color: rgb(53, 53, 53); font-size: 20px;">Previous Trading History-</h3>
-          <hr>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Company previously Traded?: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.previouslyTraded}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Ceased trading date: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.ceasedTradingDate}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Applied for letter of no obligation: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.letterOfNoObjection}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">VolStrikeOff to assist request Letter <br> of No Objection from Revenue: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.letterAssistance}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Was the company ever registered for any taxes: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.registeredForTaxes}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">What is the company tax numb: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.companyTaxNumber}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Has the company been de-registered <br> from all taxes with the Revenue?: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.deRegistered}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Have all tax returns been submitted to the <br>  Revenue Commissioners up to the date of de-registration?: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.taxReturnSubmitted}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Have all tax liabilities been fully paid to <br> the Revenue Commissioners?: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.taxesPaid}}</span></p>
+          <h3
+            class="fw-bold mr-auto text-center"
+            style="color: rgb(53, 53, 53); font-size: 20px"
+          >
+            Details of Company to be Struck Off
+          </h3>
+          <hr />
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Company Name: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.companyName
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">CRO Number: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.croNumber
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >Has Company Name Changed: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.nameChanged
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Previous company name: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.previousCompanyName
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Registered Trading As: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.tradingAs
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >Registered Business Name: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.registeredBusName
+            }}</span>
+          </p>
         </div>
         <div class="col-md-8 mr-auto mb-5">
-          <h3 class="fw-bold mr-auto text-center" style="color: rgb(53, 53, 53); font-size: 20px;">Company Law Provisions-</h3>
-          <hr>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Company no longer trading or never have: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.companyNoLongerTrading}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">All annual returns up to date: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.returnsUpToDate}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Total assets dont exceed €150: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.assetsExceed150}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Total liabilities dont exceed €150: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.liabilitiesExceed150}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Company not a party to ongoing litigation: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.ongoingLitigation}}</span></p>
+          <h3
+            class="fw-bold mr-auto text-center"
+            style="color: rgb(53, 53, 53); font-size: 20px"
+          >
+            Registered Office-
+          </h3>
+          <hr />
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Street address: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.registeredAddress1
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Address line 2: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.registeredAddress2
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Region: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.registeredRegion
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">City: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.registeredCity
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Postal code: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.registeredPostalCode
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Country: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.registeredCountry
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >Registered Business Name: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.prevRegisterOffice
+            }}</span>
+          </p>
         </div>
         <div class="col-md-8 mr-auto mb-5">
-          <h3 class="fw-bold mr-auto text-center" style="color: rgb(53, 53, 53); font-size: 20px;">Details of Director or Secretary-</h3>
-          <hr>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">First name: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.strikeOffByFirstName}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">last name: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.strikeOffByLastName}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">Director or Secretary: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.strikeOffBy}}</span></p>
-          <p class="mb-2"><span style="color: rgb(0,123,255);">T&C: </span><span style="color: rgb(31, 31, 31);">{{ singleForm.tandcAgreed}}</span></p>
+          <h3
+            class="fw-bold mr-auto text-center"
+            style="color: rgb(53, 53, 53); font-size: 20px"
+          >
+            Previous Registered Office-
+          </h3>
+          <hr />
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Street address: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.prevAddress1
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Address line 2: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.prevAddress2
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Region: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.prevRegion
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">City: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.prevCity
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Postal code: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.prevPostalCode
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Country: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.prevCountry
+            }}</span>
+          </p>
         </div>
-
+        <div class="col-md-8 mr-auto mb-5">
+          <h3
+            class="fw-bold mr-auto text-center"
+            style="color: rgb(53, 53, 53); font-size: 20px"
+          >
+            Business Address-
+          </h3>
+          <hr />
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >Business Address dif to Registered Address: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.difAddress
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Street address: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.busAddress1
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Address line 2: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.busAddress2
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Region: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.busRegion
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">City: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.busCity
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Postal code: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.busPostalCode
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Country: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.busCountry
+            }}</span>
+          </p>
+        </div>
+        <div class="col-md-8 mr-auto mb-5">
+          <h3
+            class="fw-bold mr-auto text-center"
+            style="color: rgb(53, 53, 53); font-size: 20px"
+          >
+            Previous Trading History-
+          </h3>
+          <hr />
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >Company previously Traded?: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.previouslyTraded
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Ceased trading date: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.ceasedTradingDate
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >Applied for letter of no obligation: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.letterOfNoObjection
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >VolStrikeOff to assist request Letter <br />
+              of No Objection from Revenue: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.letterAssistance
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >Was the company ever registered for any taxes: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.registeredForTaxes
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >What is the company tax numb: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.companyTaxNumber
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >Has the company been de-registered <br />
+              from all taxes with the Revenue?: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.deRegistered
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >Have all tax returns been submitted to the <br />
+              Revenue Commissioners up to the date of de-registration?: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.taxReturnSubmitted
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >Have all tax liabilities been fully paid to <br />
+              the Revenue Commissioners?: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.taxesPaid
+            }}</span>
+          </p>
+        </div>
+        <div class="col-md-8 mr-auto mb-5">
+          <h3
+            class="fw-bold mr-auto text-center"
+            style="color: rgb(53, 53, 53); font-size: 20px"
+          >
+            Company Law Provisions-
+          </h3>
+          <hr />
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >Company no longer trading or never have: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.companyNoLongerTrading
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >All annual returns up to date: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.returnsUpToDate
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >Total assets dont exceed €150: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.assetsExceed150
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >Total liabilities dont exceed €150: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.liabilitiesExceed150
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)"
+              >Company not a party to ongoing litigation: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.ongoingLitigation
+            }}</span>
+          </p>
+        </div>
+        <div class="col-md-8 mr-auto mb-5">
+          <h3
+            class="fw-bold mr-auto text-center"
+            style="color: rgb(53, 53, 53); font-size: 20px"
+          >
+            Details of Director or Secretary-
+          </h3>
+          <hr />
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">First name: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.strikeOffByFirstName
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">last name: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.strikeOffByLastName
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Director or Secretary: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.strikeOffBy
+            }}</span>
+          </p>
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">T&C: </span
+            ><span style="color: rgb(31, 31, 31)">{{
+              singleForm.tandcAgreed
+            }}</span>
+          </p>
+        </div>
       </div>
-        
-     </div>
-      
-     <!-- <span><b style="color: rgb(0,123,255); font-size: 35px; font-weight: 600; padding-bottom: 30px;">{{ singleForm.companyName}}</b></span><br>
+    </div>
+
+    <!-- <span><b style="color: rgb(0,123,255); font-size: 35px; font-weight: 600; padding-bottom: 30px;">{{ singleForm.companyName}}</b></span><br>
 <span><b style="color: rgb(53, 53, 53);font-size: 20px; font-weight: 500; padding-bottom: 30px;">Which service do you require-</b></span><br>
 
     <span style="color: rgb(0,123,255);">Service: <b style="color: rgb(31, 31, 31);">{{ singleForm.service}}</b></span><br>
@@ -178,9 +504,6 @@
     <span style="color: rgb(0,123,255);">last name: <b style="color: rgb(31, 31, 31);">{{ singleForm.strikeOffByLastName}}</b></span><br>
     <span style="color: rgb(0,123,255);">Director or Secretary: <b style="color: rgb(31, 31, 31);">{{ singleForm.strikeOffBy}}</b></span><br>
     <span style="color: rgb(0,123,255);">T&C: <b style="color: rgb(31, 31, 31);">{{ singleForm.tandcAgreed}}</b></span><br> -->
-
-
-
 
     <!-- <div class="row justify-content-center">
       <div class="col-sm-6 mt-4 mb-4 mr-auto">

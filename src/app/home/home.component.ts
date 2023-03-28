@@ -1,5 +1,13 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit, Input, ViewChild, Directive, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  Directive,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HomeService } from './home.service';
 import { InboxComponent } from './inbox/inbox.component';
@@ -10,7 +18,6 @@ import { ApiService } from '../api.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-
   @ViewChild(InboxComponent) child!: InboxComponent;
 
   public forms: any[] = [];
@@ -25,49 +32,51 @@ export class HomeComponent implements OnInit {
   constructor(
     private homeService: HomeService,
     private apiService: ApiService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-
-    this.openUnprocessed()
+    this.openUnprocessed();
 
     this.loginForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
 
-    this.homeService.getRequests().subscribe((res: HttpResponse<any[]>) => {
-      console.log('zz');
-      console.log(res);
-    });
+    // this.homeService.getRequests().subscribe((res: HttpResponse<any[]>) => {
+    //   console.log('zz');
+    //   console.log(res);
+    // });
 
     this.apiService.getRequests().subscribe((data: any[]) => {
-      console.log(data);
       this.requests = data;
     });
   }
 
   openUnprocessed() {
     this.apiService.getRequests().subscribe((data: any[]) => {
-      this.forms = data.filter(request => !('processed' in request) || request.processed === false);
-      this.title = 'Unprocessed'
+      this.forms = data.filter(
+        (request) => !('processed' in request) || request.processed === false
+      );
+      this.title = 'Unprocessed';
       this.message = '';
-      this.openForm = []
+      this.openForm = [];
     });
   }
 
   openProcessed() {
     // debugger
     this.apiService.getRequests().subscribe((data: any[]) => {
-      const filteredRequests = data.filter(request => request.processed === true);
+      const filteredRequests = data.filter(
+        (request) => request.processed === true
+      );
       this.forms = filteredRequests;
-      this.title = 'Processed'
+      this.title = 'Processed';
 
       if (filteredRequests.length > 0) {
         this.message = '';
         // clear the message if there are processed requests
       } else {
-        this.message = "There are no processed files"
+        this.message = 'There are no processed files';
         // Do something with the message, e.g. display it in the UI
       }
     });
@@ -75,32 +84,35 @@ export class HomeComponent implements OnInit {
 
   getFormId(formId: string) {
     this.apiService.getRequests().subscribe((data: any[]) => {
-    this.openForm = data.filter(request => request._id === formId);
-  });
-}
-
-  updateForm(processedForm: any) {
-    this.apiService.updateRequest(processedForm[0].unid).subscribe((data: any[]) => {
-      console.log(data);
+      this.openForm = data.filter((request) => request._id === formId);
     });
-    this.openForm = []
-    this.openUnprocessed()
   }
 
-  deleteForm(unid: any){
-    console.log("unidunidundiundi");
+  updateForm(processedForm: any) {
+    this.apiService
+      .updateRequest(processedForm[0].unid)
+      .subscribe((data: any[]) => {
+        console.log(data);
+      });
+    this.openForm = [];
+    this.openUnprocessed();
+  }
+
+  deleteForm(unid: any) {
+    debugger;
+    console.log('unidunidundiundi');
 
     console.log(unid);
     this.apiService.deleteRequest(unid).subscribe((data: any[]) => {
-      console.log("datadatdatdat");
+      console.log('datadatdatdat');
 
       console.log(data);
     });
-    this.openForm = []
-    this.openUnprocessed()
+    this.openForm = [];
+    this.openUnprocessed();
   }
 
-  // nav item hover btns 
+  // nav item hover btns
 
   // links:  NodeListOf<Element> = document.querySelectorAll(".nav-link");
 
@@ -115,8 +127,6 @@ export class HomeComponent implements OnInit {
   //     });
   //   });
   // }
-
-  
 
   get nameField(): any {
     return this.loginForm.get('name');
