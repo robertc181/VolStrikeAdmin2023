@@ -79,6 +79,7 @@ export class HomeComponent implements OnInit {
         this.message = 'There are no processed files';
         // Do something with the message, e.g. display it in the UI
       }
+      this.openForm = [];
     });
   }
 

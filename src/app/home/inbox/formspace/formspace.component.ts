@@ -11,6 +11,8 @@ export class FormspaceComponent implements OnInit {
   @Output() deleteIdEmitter = new EventEmitter<any>();
 
   processedForm: any[] = [];
+  showButtons = false;
+
 
   constructor() {}
 
@@ -24,8 +26,17 @@ export class FormspaceComponent implements OnInit {
     this.processedEmitter.emit(this.processedForm);
   }
 
+  onDeleteClicked() {
+    this.showButtons = true;
+  }
+
+  onCancelDelete() {
+    this.showButtons = false;
+  }
+
   deleteForm(Form: any) {
     this.deleteIdEmitter.emit(Form[0].unid);
+    this.showButtons = false;
   }
 
   ngOnInit(): void {}

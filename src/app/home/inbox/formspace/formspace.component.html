@@ -1,25 +1,25 @@
 <div class="formspace bg-light" *ngFor="let singleForm of Form">
-  <a
-    href="javascript:void(0)"
-    style="margin-right: 14px"
-    class="form-info-head d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none"
-  >
-    <span class="fs-6 fw-semibold text-center"
-      >{{ singleForm.fullName }} - {{ singleForm.emailAddress }}</span
-    >
-    <span
-      *ngIf="!singleForm.processed"
-      (click)="processFile(singleForm)"
-      class="fs-6 fw-semibold text-center ms-auto text-primary"
-      >Process</span
-    >
-    <span
-      *ngIf="singleForm.processed"
-      (click)="deleteForm(Form)"
-      class="fs-6 fw-semibold delete-btn text-center ms-auto"
-    >
-      <i class="fa fa-trash"></i>
+  <a href="javascript:void(0)" style="margin-right: 14px"
+    class="form-info-head d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none">
+    <span class="fs-6 fw-semibold text-center">{{ singleForm.fullName }} - {{ singleForm.emailAddress }}</span>
+    <span *ngIf="!singleForm.processed" (click)="processFile(singleForm)"
+      class="fs-6 fw-semibold text-center ms-auto text-primary">Process</span>
+    <span *ngIf="singleForm.processed" 
+      class="fs-6 fw-semibold delete-btn text-center ms-auto">
+      <!-- <i class="fa fa-trash"></i> -->
+      <div *ngIf="!showButtons">
+        <span (click)="onDeleteClicked()" class="">
+          <i class="fa fa-trash"></i>
+        </span>
+      </div>
+  
+      <div *ngIf="showButtons" style="margin-bottom: -4px; margin-top: -4px;">
+        <button (click)="deleteForm(Form)" class="btn btn-sm btn-danger me-2 pt-none pb-none">Confirm</button>
+        <button (click)="onCancelDelete()" class="btn btn-sm btn-secondary pt-none pb-none">Cancel</button>
+      </div>
     </span>
+    <!-- fs-6 fw-semibold delete-btn text-center ms-auto -->
+    <!-- (click)="deleteForm(Form)" -->
   </a>
   <div
     class="list-group list-group-flush border-bottom scrollarea mr-auto"

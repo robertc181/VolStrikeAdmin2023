@@ -11,6 +11,11 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
+  public submitLoginForm(loginData: any): Observable<any> {
+    debugger
+    return this.http.post<any>(`${this.baseUrl}/login`, loginData);
+  }
+
   public getRequests(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/read`);
   }
@@ -27,6 +32,8 @@ export class ApiService {
       headers: this.headers,
     });
   }
+
+  
 
   // getRequests() {
   //   return this.http.get('/api/objects');

@@ -18,6 +18,28 @@ var server = app.listen(process.env.PORT || 8081, function () {
   console.log("App now running on port", port);
 });
 
+// Set the expected name and password as config vars
+// const expectedName = process.env.NAME;
+// const expectedPassword = process.env.PASSWORD;
+
+const expectedName = "Dave";
+const expectedPassword = "psw0rd";
+
+app.post('/api/login', (req, res) => {
+  const { name, password } = req.body;
+  console.log("dddddddddddddddddddddddddddddddddddddd");
+  console.log(req.body);
+
+  if (name === expectedName && password === expectedPassword) {
+    // if the name and password match the expected values, return success
+    res.status(200).send('Login Successful!');
+  } else {
+    // if the name and password do not match the expected values, return error
+    res.status(401).send('Invalid Login Credentials');
+  }
+});
+
+
 app.get("/", (req, res) =>
   res.sendFile(path.resolve("dist/voluntarystrikeoffadmin/index.html"))
 );
@@ -47,7 +69,8 @@ app.put("/api/update/:id", function (req, res) {
 
 app.delete("/api/delete/:id", function (req, res) {
   console.log("dddddddddddddddddddddddddddddddddddddd");
-  console.log(req.params.id)(async () => {
+  console.log(req.params.id);
+  (async () => {
     success = await deleteRequest(req.params.id);
     if (success.deletedCount === 1) {
       res.status(200);
@@ -129,6 +152,7 @@ async function deleteRequest(id) {
     await client.close();
   }
 }
+
 
 // const express = require("express");
 // const mongoose = require("mongoose");
