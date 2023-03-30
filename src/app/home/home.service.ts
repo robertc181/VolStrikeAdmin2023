@@ -9,10 +9,8 @@ export class HomeService {
   constructor(private httpClient: HttpClient) {}
 
   getRequests() {
-    // debugger;
     return this.httpClient.get('http://localhost:8081/api/read').pipe(
       map((response: any) => {
-        // debugger;
         return response.body;
       })
     );

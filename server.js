@@ -25,20 +25,17 @@ var server = app.listen(process.env.PORT || 8081, function () {
 const expectedName = "Dave";
 const expectedPassword = "psw0rd";
 
-app.post('/api/login', (req, res) => {
+app.post("/api/login", (req, res) => {
   const { name, password } = req.body;
-  console.log("dddddddddddddddddddddddddddddddddddddd");
-  console.log(req.body);
 
   if (name === expectedName && password === expectedPassword) {
     // if the name and password match the expected values, return success
-    res.status(200).send('Login Successful!');
+    res.status(200).json({ valid: true });
   } else {
     // if the name and password do not match the expected values, return error
-    res.status(401).send('Invalid Login Credentials');
+    res.status(401).json({ valid: false });
   }
 });
-
 
 app.get("/", (req, res) =>
   res.sendFile(path.resolve("dist/voluntarystrikeoffadmin/index.html"))
@@ -68,21 +65,17 @@ app.put("/api/update/:id", function (req, res) {
 });
 
 app.delete("/api/delete/:id", function (req, res) {
-  console.log("dddddddddddddddddddddddddddddddddddddd");
-  console.log(req.params.id);
   (async () => {
     success = await deleteRequest(req.params.id);
     if (success.deletedCount === 1) {
       res.status(200);
     } else {
-      console.log("error here");
       handleError(res, err.message, "Failed to delete request.");
     }
   })();
 });
 
 async function getRequests() {
-  console.log("getRequests");
   let recs = [];
   try {
     await client.connect();
@@ -112,7 +105,6 @@ async function getRequests() {
 }
 
 async function updateRequest(id) {
-  console.log("updateRequest");
   try {
     await client.connect();
     const db = client.db("strike_offs");
@@ -122,7 +114,6 @@ async function updateRequest(id) {
       { unid: id },
       { $set: { processed: true } }
     );
-    console.log(resp);
     return resp;
   } catch (err) {
     console.log("error updateRequest");
@@ -134,9 +125,6 @@ async function updateRequest(id) {
 }
 
 async function deleteRequest(id) {
-  console.log("deleteRequest");
-
-  console.log(id);
   try {
     await client.connect();
     const db = client.db("strike_offs");
@@ -152,61 +140,3 @@ async function deleteRequest(id) {
     await client.close();
   }
 }
-
-
-// const express = require("express");
-// const mongoose = require("mongoose");
-
-// const app = express();
-// const port = 3000;
-
-// // Connect to MongoDB
-// // mongodb://localhost/my_database
-// mongoose.connect(
-//   "mongodb+srv://strike_off_admin:g9p0xff8S5ThqFZf@cluster0.sx8yktf.mongodb.net/?retryWrites=true&w=majority"
-// );
-
-// // Define a Mongoose schema for objects
-// const objectSchema = new mongoose.Schema({
-//   name: String,
-//   description: String,
-// });
-
-// // Define a Mongoose model for objects
-// const Object = mongoose.model("Object", objectSchema);
-
-// // Define a route for getting all objects
-// app.get("/api/requests", async (req, res) => {
-//   const requests = await Object.find();
-//   res.send(requests);
-// });
-
-// // Define a route for creating a new object
-// // app.post('/api/objects', async (req, res) => {
-// //   const { name, description } = req.body;
-// //   const object = new Object({ name, description });
-// //   await object.save();
-// //   res.send(object);
-// // });
-
-// // Define a route for updating an object
-// app.put("/api/requests/:id", async (req, res) => {
-//   const { name, description } = req.body;
-//   // col.updateOne({ unid: id }, { $set: { processed: true } }
-//   const object = await Object.findByIdAndUpdate(req.params.id, {
-//     processed: true,
-//   });
-//   res.send(object);
-// });
-
-// // Define a route for deleting an object
-// app.delete("/api/requests/:id", async (req, res) => {
-//   console.log(req.params.id);
-//   await Object.findByIdAndDelete(req.params.id);
-//   res.send({ success: true });
-// });
-
-// // Start the server
-// app.listen(port, () => {
-//   console.log(`Server listening on port ${port}`);
-// });

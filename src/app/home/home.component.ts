@@ -42,11 +42,6 @@ export class HomeComponent implements OnInit {
       password: new FormControl('', [Validators.required]),
     });
 
-    // this.homeService.getRequests().subscribe((res: HttpResponse<any[]>) => {
-    //   console.log('zz');
-    //   console.log(res);
-    // });
-
     this.apiService.getRequests().subscribe((data: any[]) => {
       this.requests = data;
     });
@@ -64,7 +59,6 @@ export class HomeComponent implements OnInit {
   }
 
   openProcessed() {
-    // debugger
     this.apiService.getRequests().subscribe((data: any[]) => {
       const filteredRequests = data.filter(
         (request) => request.processed === true
@@ -93,41 +87,19 @@ export class HomeComponent implements OnInit {
     this.apiService
       .updateRequest(processedForm[0].unid)
       .subscribe((data: any[]) => {
-        console.log(data);
+        // console.log(data);
       });
     this.openForm = [];
     this.openUnprocessed();
   }
 
   deleteForm(unid: any) {
-    debugger;
-    console.log('unidunidundiundi');
-
-    console.log(unid);
     this.apiService.deleteRequest(unid).subscribe((data: any[]) => {
-      console.log('datadatdatdat');
-
-      console.log(data);
+      // console.log(data);
     });
     this.openForm = [];
-    this.openUnprocessed();
+    this.openProcessed();
   }
-
-  // nav item hover btns
-
-  // links:  NodeListOf<Element> = document.querySelectorAll(".nav-link");
-
-  // changelinks() {
-  //   this.links.forEach((link: HTMLElement) => {
-  //     link.addEventListener("click", (e: Event) => {
-  //       e.preventDefault();
-  //       this.links.forEach((link) => {
-  //         link.classList.remove("active");
-  //       });
-  //       link.classList.add("active");
-  //     });
-  //   });
-  // }
 
   get nameField(): any {
     return this.loginForm.get('name');
@@ -136,7 +108,7 @@ export class HomeComponent implements OnInit {
     return this.loginForm.get('password');
   }
   loginFormSubmit(): void {
-    console.log(this.loginForm.value);
+    // console.log(this.loginForm.value);
     // Call Api
   }
 }

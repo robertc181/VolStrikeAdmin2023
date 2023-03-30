@@ -13,15 +13,9 @@ export class FormspaceComponent implements OnInit {
   processedForm: any[] = [];
   showButtons = false;
 
-
   constructor() {}
 
-  // function processFile() {
-
-  // }
-
   processFile(singleForm: any) {
-    // singleForm.processed = true
     this.processedForm.push(singleForm);
     this.processedEmitter.emit(this.processedForm);
   }
