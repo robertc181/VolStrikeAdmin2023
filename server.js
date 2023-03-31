@@ -7,9 +7,6 @@ const MONGO_PWD = process.env.MONGO_PWD;
 const expectedName = process.env.AdminUser;
 const expectedPassword = process.env.AdminPwd;
 
-var DATABASE_NAME = "strike_offs";
-var CONTACTS_COLLECTION = "requests";
-
 var app = express();
 app.use(bodyParser.json());
 
@@ -28,27 +25,9 @@ var CONNECTION_URL =
   "mongodb+srv://strike_off_admin:9nZswGiDOBZvej55@cluster0.sx8yktf.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(CONNECTION_URL);
 
-// var server = app.listen(process.env.PORT || 8081, function () {
-//   var port = server.address().port;
-//   console.log("App now running on port", port);
-// });
-var db;
-
-client.connect(CONNECTION_URL, function (err, client) {
-  if (err) {
-    console.log(err);
-    process.exit(1);
-  }
-
-  // Save database object from the callback for reuse.
-  db = client.db(DATABASE_NAME);
-  console.log("Database connection ready");
-
-  // Initialize the app.
-  var server = app.listen(process.env.PORT || 8081, function () {
-    var port = server.address().port;
-    console.log("App now running on port", port);
-  });
+var server = app.listen(process.env.PORT || 8081, function () {
+  var port = server.address().port;
+  console.log("App now running on port", port);
 });
 
 app.post("/api/login", (req, res) => {
@@ -104,10 +83,9 @@ app.delete("/api/delete/:id", function (req, res) {
 async function getRequests() {
   let recs = [];
   try {
-    // await client.connect();
-    // const db = client.db("strike_offs");
-    // const col = db.collection("requests");
-    const col = db.collection(CONTACTS_COLLECTION);
+    await client.connect();
+    const db = client.db("strike_offs");
+    const col = db.collection("requests");
 
     const query = {};
 
@@ -125,18 +103,17 @@ async function getRequests() {
     console.log("error getRequests");
     console.log(err.stack);
   } finally {
-    // console.log("closing getRequests");
-    // await client.close();
+    console.log("closing getRequests");
+    await client.close();
     return recs;
   }
 }
 
 async function updateRequest(id) {
   try {
-    // await client.connect();
-    // const db = client.db("strike_offs");
-    // const col = db.collection("requests");
-    const col = db.collection(CONTACTS_COLLECTION);
+    await client.connect();
+    const db = client.db("strike_offs");
+    const col = db.collection("requests");
 
     const resp = await col.updateOne(
       { unid: id },
@@ -147,17 +124,16 @@ async function updateRequest(id) {
     console.log("error updateRequest");
     console.log(err.stack);
   } finally {
-    // console.log("closing updateRequest");
-    // await client.close();
+    console.log("closing updateRequest");
+    await client.close();
   }
 }
 
 async function deleteRequest(id) {
   try {
-    // await client.connect();
-    // const db = client.db("strike_offs");
-    // const col = db.collection("requests");
-    const col = db.collection(CONTACTS_COLLECTION);
+    await client.connect();
+    const db = client.db("strike_offs");
+    const col = db.collection("requests");
 
     const resp = await col.deleteOne({ unid: id }, true);
     return resp;
@@ -165,7 +141,7 @@ async function deleteRequest(id) {
     console.log("error deleteRequest");
     console.log(err.stack);
   } finally {
-    // console.log("closing deleteRequest");
-    // await client.close();
+    console.log("closing deleteRequest");
+    await client.close();
   }
 }
