@@ -7,6 +7,9 @@ const MONGO_PWD = process.env.MONGO_PWD;
 const expectedName = process.env.AdminUser;
 const expectedPassword = process.env.AdminPwd;
 
+var DATABASE_NAME = "strike_offs";
+var CONTACTS_COLLECTION = "requests";
+
 var app = express();
 app.use(bodyParser.json());
 
@@ -23,11 +26,29 @@ app.use(express.static(distDir));
 //   "mongodb+srv://strike_off_admin:9nZswGiDOBZvej55@cluster0.sx8yktf.mongodb.net/?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true";
 var CONNECTION_URL =
   "mongodb+srv://strike_off_admin:9nZswGiDOBZvej55@cluster0.sx8yktf.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(CONNECTION_URL);
+// const client = new MongoClient(CONNECTION_URL);
 
-var server = app.listen(process.env.PORT || 8081, function () {
-  var port = server.address().port;
-  console.log("App now running on port", port);
+// var server = app.listen(process.env.PORT || 8081, function () {
+//   var port = server.address().port;
+//   console.log("App now running on port", port);
+// });
+var db;
+
+mongodb.MongoClient.connect(CONNECTION_URL, function (err, client) {
+  if (err) {
+    console.log(err);
+    process.exit(1);
+  }
+
+  // Save database object from the callback for reuse.
+  db = client.db(DATABASE_NAME);
+  console.log("Database connection ready");
+
+  // Initialize the app.
+  var server = app.listen(process.env.PORT || 8081, function () {
+    var port = server.address().port;
+    console.log("App now running on port", port);
+  });
 });
 
 app.post("/api/login", (req, res) => {
@@ -83,9 +104,10 @@ app.delete("/api/delete/:id", function (req, res) {
 async function getRequests() {
   let recs = [];
   try {
-    await client.connect();
-    const db = client.db("strike_offs");
-    const col = db.collection("requests");
+    // await client.connect();
+    // const db = client.db("strike_offs");
+    // const col = db.collection("requests");
+    const col = db.collection(CONTACTS_COLLECTION);
 
     const query = {};
 
@@ -111,9 +133,10 @@ async function getRequests() {
 
 async function updateRequest(id) {
   try {
-    await client.connect();
-    const db = client.db("strike_offs");
-    const col = db.collection("requests");
+    // await client.connect();
+    // const db = client.db("strike_offs");
+    // const col = db.collection("requests");
+    const col = db.collection(CONTACTS_COLLECTION);
 
     const resp = await col.updateOne(
       { unid: id },
@@ -131,9 +154,10 @@ async function updateRequest(id) {
 
 async function deleteRequest(id) {
   try {
-    await client.connect();
-    const db = client.db("strike_offs");
-    const col = db.collection("requests");
+    // await client.connect();
+    // const db = client.db("strike_offs");
+    // const col = db.collection("requests");
+    const col = db.collection(CONTACTS_COLLECTION);
 
     const resp = await col.deleteOne({ unid: id }, true);
     return resp;
