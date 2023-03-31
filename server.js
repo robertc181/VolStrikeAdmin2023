@@ -19,8 +19,10 @@ app.use(express.static(distDir));
 //   ":" +
 //   MONGO_PWD +
 //   "@cluster0.sx8yktf.mongodb.net/?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true";
+// var CONNECTION_URL =
+//   "mongodb+srv://strike_off_admin:9nZswGiDOBZvej55@cluster0.sx8yktf.mongodb.net/?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true";
 var CONNECTION_URL =
-  "mongodb+srv://strike_off_admin:9nZswGiDOBZvej55@cluster0.sx8yktf.mongodb.net/?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true";
+  "mongodb+srv://strike_off_admin:9nZswGiDOBZvej55@cluster0.sx8yktf.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(CONNECTION_URL);
 
 var server = app.listen(process.env.PORT || 8081, function () {
