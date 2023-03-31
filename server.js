@@ -2,6 +2,10 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
 const { MongoClient } = require("mongodb");
+const MONGO_USERNAME = process.env.MONGO_USERNAME;
+const MONGO_PWD = process.env.MONGO_PWD;
+const expectedName = process.env.AdminUser;
+const expectedPassword = process.env.AdminPwd;
 
 var app = express();
 app.use(bodyParser.json());
@@ -10,20 +14,17 @@ var distDir = __dirname + "/dist/voluntarystrikeoffadmin/";
 app.use(express.static(distDir));
 
 var CONNECTION_URL =
-  "mongodb+srv://strike_off_admin:g9p0xff8S5ThqFZf@cluster0.sx8yktf.mongodb.net/?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true";
+  "mongodb+srv://" +
+  MONGO_USERNAME +
+  ":" +
+  MONGO_PWD +
+  "@cluster0.sx8yktf.mongodb.net/?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true";
 const client = new MongoClient(CONNECTION_URL);
 
 var server = app.listen(process.env.PORT || 8081, function () {
   var port = server.address().port;
   console.log("App now running on port", port);
 });
-
-// Set the expected name and password as config vars
-// const expectedName = process.env.NAME;
-// const expectedPassword = process.env.PASSWORD;
-
-const expectedName = "Dave";
-const expectedPassword = "psw0rd";
 
 app.post("/api/login", (req, res) => {
   const { name, password } = req.body;
