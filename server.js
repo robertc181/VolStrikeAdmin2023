@@ -103,8 +103,8 @@ async function getRequests() {
     console.log("error getRequests");
     console.log(err.stack);
   } finally {
-    console.log("closing getRequests");
-    await client.close();
+    // console.log("closing getRequests");
+    // await client.close();
     return recs;
   }
 }
@@ -124,8 +124,8 @@ async function updateRequest(id) {
     console.log("error updateRequest");
     console.log(err.stack);
   } finally {
-    console.log("closing updateRequest");
-    await client.close();
+    // console.log("closing updateRequest");
+    // await client.close();
   }
 }
 
@@ -141,7 +141,7 @@ async function deleteRequest(id) {
     console.log("error deleteRequest");
     console.log(err.stack);
   } finally {
-    console.log("closing deleteRequest");
-    await client.close();
+    // console.log("closing deleteRequest");
+    // await client.close();
   }
 }
