@@ -13,12 +13,14 @@ app.use(bodyParser.json());
 var distDir = __dirname + "/dist/voluntarystrikeoffadmin/";
 app.use(express.static(distDir));
 
+// var CONNECTION_URL =
+//   "mongodb+srv://" +
+//   MONGO_USERNAME +
+//   ":" +
+//   MONGO_PWD +
+//   "@cluster0.sx8yktf.mongodb.net/?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true";
 var CONNECTION_URL =
-  "mongodb+srv://" +
-  MONGO_USERNAME +
-  ":" +
-  MONGO_PWD +
-  "@cluster0.sx8yktf.mongodb.net/?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true";
+  "mongodb+srv://strike_off_admin:9nZswGiDOBZvej55@cluster0.sx8yktf.mongodb.net/?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true";
 const client = new MongoClient(CONNECTION_URL);
 
 var server = app.listen(process.env.PORT || 8081, function () {
