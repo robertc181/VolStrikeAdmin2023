@@ -1,8 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
-// const { MongoClient } = require("mongodb");
-const mongodb = require("mongodb");
+const { MongoClient } = require("mongodb");
 const MONGO_USERNAME = process.env.MONGO_USERNAME;
 const MONGO_PWD = process.env.MONGO_PWD;
 const expectedName = process.env.AdminUser;
@@ -27,7 +26,7 @@ app.use(express.static(distDir));
 //   "mongodb+srv://strike_off_admin:9nZswGiDOBZvej55@cluster0.sx8yktf.mongodb.net/?retryWrites=true&w=majority&useNewUrlParser=true&useUnifiedTopology=true";
 var CONNECTION_URL =
   "mongodb+srv://strike_off_admin:9nZswGiDOBZvej55@cluster0.sx8yktf.mongodb.net/?retryWrites=true&w=majority";
-// const client = new MongoClient(CONNECTION_URL);
+const client = new MongoClient(CONNECTION_URL);
 
 // var server = app.listen(process.env.PORT || 8081, function () {
 //   var port = server.address().port;
@@ -35,7 +34,7 @@ var CONNECTION_URL =
 // });
 var db;
 
-mongodb.MongoClient.connect(CONNECTION_URL, function (err, client) {
+client.connect(CONNECTION_URL, function (err, client) {
   if (err) {
     console.log(err);
     process.exit(1);
