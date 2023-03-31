@@ -46,8 +46,8 @@ app.get("/", (req, res) =>
   res.sendFile(path.resolve("dist/voluntarystrikeoffadmin/index.html"))
 );
 
-function handleError(res, reason, message, code) {
-  console.log("ERROR: " + reason);
+function handleError(res, message, code) {
+  console.log("ERROR: " + message);
   res.status(code || 500).json({ error: message });
 }
 
@@ -64,7 +64,7 @@ app.put("/api/update/:id", function (req, res) {
     if (success.modifiedCount === 1) {
       res.status(200);
     } else {
-      handleError(res, err.message, "Failed to update request.");
+      handleError(res, "Failed to update request.");
     }
   })();
 });
@@ -75,7 +75,7 @@ app.delete("/api/delete/:id", function (req, res) {
     if (success.deletedCount === 1) {
       res.status(200);
     } else {
-      handleError(res, err.message, "Failed to delete request.");
+      handleError(res, "Failed to delete request.");
     }
   })();
 });
