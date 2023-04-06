@@ -38,17 +38,30 @@
         </button>
       </div>
     </span> -->
+
+    <!--  -->
+
+    <span
+      class="fs-6 fw-semibold delete-btn text-center ms-auto"
+    >
+      <div>
+        <span (click)="printContent()" class="">
+          Print
+        </span>
+      </div>
+
+    </span>
   </a>
   <div
     class="list-group list-group-flush border-bottom scrollarea mr-auto"
     style="max-height: calc(100vh - 114px); overflow-y: scroll"
   >
-    <div class="container mt-5">
+    <div #printContainer class="container mt-5">
       <div class="row mx-auto align-items-center justify-content-center">
         <div class="col-md-8 mr-auto text-center mb-5">
           <h1 class="fw-bold">{{ singleForm.companyName }}</h1>
           <h4 class="fw-bold" style="color: rgb(53, 53, 53); font-size: 25px">
-            {{ singleForm.fullName }}
+            Service - {{ singleForm.serv }}
           </h4>
           <hr />
         </div>
@@ -60,6 +73,10 @@
             Details of Advertisement Placer
           </h3>
           <hr />
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Role: </span
+            ><span style="color: rgb(31, 31, 31)">{{ singleForm.serve }}</span>
+          </p>
           <p class="mb-2">
             <span style="color: rgb(0, 123, 255)">Role: </span
             ><span style="color: rgb(31, 31, 31)">{{ singleForm.person }}</span>
