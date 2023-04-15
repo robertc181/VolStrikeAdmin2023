@@ -66,8 +66,12 @@ const deleteRequest = async (req, res) => {
   return update;
 };
 
-app.listen(PORT, async () => {
-  console.log(`server up on port....... ${PORT}`);
+// app.listen(PORT, async () => {
+//   console.log(`server up on port....... ${PORT}`);
+// });
+var server = app.listen(process.env.PORT || 3000, function () {
+  var port = server.address().port;
+  console.log("App now running on port", port);
 });
 
 app.post("/login", (req, res) => {
