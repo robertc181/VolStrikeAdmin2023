@@ -7,7 +7,7 @@
     <span class="fs-6 fw-semibold text-center"
       >{{ singleForm.fullName }} - {{ singleForm.emailAddress }}</span
     >
-    <!-- <span
+    <span
       *ngIf="!singleForm.processed"
       (click)="processFile(singleForm)"
       class="fs-6 fw-semibold text-center ms-auto text-primary"
@@ -37,7 +37,7 @@
           Cancel
         </button>
       </div>
-    </span> -->
+    </span>
   </a>
   <div
     class="list-group list-group-flush border-bottom scrollarea mr-auto"
@@ -60,6 +60,10 @@
             Details of Advertisement Placer
           </h3>
           <hr />
+          <p class="mb-2">
+            <span style="color: rgb(0, 123, 255)">Service: </span
+            ><span style="color: rgb(31, 31, 31)">{{ singleForm.serv }}</span>
+          </p>
           <p class="mb-2">
             <span style="color: rgb(0, 123, 255)">Role: </span
             ><span style="color: rgb(31, 31, 31)">{{ singleForm.person }}</span>

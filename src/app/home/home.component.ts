@@ -9,7 +9,6 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HomeService } from './home.service';
 import { InboxComponent } from './inbox/inbox.component';
 import { ApiService } from '../api.service';
 @Component({
@@ -29,10 +28,7 @@ export class HomeComponent implements OnInit {
 
   loginForm!: FormGroup;
 
-  constructor(
-    private homeService: HomeService,
-    private apiService: ApiService
-  ) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.openUnprocessed();
@@ -48,9 +44,10 @@ export class HomeComponent implements OnInit {
   }
 
   openUnprocessed() {
-    this.apiService.getRequests().subscribe((data: any[]) => {
-      this.forms = data.filter(
-        (request) => !('processed' in request) || request.processed === false
+    this.apiService.getRequests().subscribe((data: any) => {
+      this.forms = data.data.filter(
+        (request: any) =>
+          !('processed' in request) || request.processed === false
       );
       this.title = 'Unprocessed';
       this.message = '';
@@ -59,9 +56,9 @@ export class HomeComponent implements OnInit {
   }
 
   openProcessed() {
-    this.apiService.getRequests().subscribe((data: any[]) => {
-      const filteredRequests = data.filter(
-        (request) => request.processed === true
+    this.apiService.getRequests().subscribe((data: any) => {
+      const filteredRequests = data.data.filter(
+        (request: any) => request.processed === true
       );
       this.forms = filteredRequests;
       this.title = 'Processed';
@@ -78,8 +75,10 @@ export class HomeComponent implements OnInit {
   }
 
   getFormId(formId: string) {
-    this.apiService.getRequests().subscribe((data: any[]) => {
-      this.openForm = data.filter((request) => request._id === formId);
+    this.apiService.getRequests().subscribe((data: any) => {
+      this.openForm = data.data.filter(
+        (request: any) => request._id === formId
+      );
     });
   }
 

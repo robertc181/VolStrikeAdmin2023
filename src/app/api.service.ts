@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = '/api'; // replace with your server URL
+  private baseUrl = ''; //'http://localhost:8081';
   private headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) {}
@@ -20,11 +20,11 @@ export class ApiService {
   }
 
   public updateRequest(id: string): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/update/:${id}`, { id });
+    return this.http.put<any>(`${this.baseUrl}/update/${id}`, { id });
   }
 
   public deleteRequest(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/delete/:${id}`, {
+    return this.http.delete<any>(`${this.baseUrl}/delete/${id}`, {
       headers: this.headers,
     });
   }
