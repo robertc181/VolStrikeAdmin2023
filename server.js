@@ -10,7 +10,7 @@ const expectedPassword = process.env.AdminPwd;
 // const expectedPassword = "r";
 
 const mongoose = require("mongoose");
-const cors = require("cors");
+// const cors = require("cors");
 
 const PORT = 8081;
 
