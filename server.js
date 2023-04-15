@@ -6,6 +6,8 @@ const MONGO_USERNAME = process.env.MONGO_USERNAME;
 const MONGO_PWD = process.env.MONGO_PWD;
 const expectedName = process.env.AdminUser;
 const expectedPassword = process.env.AdminPwd;
+// const expectedName = "h";
+// const expectedPassword = "r";
 
 const mongoose = require("mongoose");
 const cors = require("cors");
