@@ -17,7 +17,7 @@ const PORT = 8081;
 var app = express();
 app.use(bodyParser.json());
 
-var distDir = __dirname + "/dist/voluntarystrikeoffadmin/";
+var distDir = __dirname + "/dist/voluntarystrikeoffadmin";
 app.use(express.static(distDir));
 
 var CONNECTION_URL =
