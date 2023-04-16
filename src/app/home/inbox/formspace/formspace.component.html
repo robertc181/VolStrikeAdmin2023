@@ -5,14 +5,14 @@
     class="form-info-head d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none"
   >
     <span class="fs-6 fw-semibold text-center"
-      >{{ singleForm.fullName }} - {{ singleForm.emailAddress }}</span
-    >
+      >{{ singleForm.fullName }} - {{ singleForm.emailAddress }}
+    </span>
     <span
       *ngIf="!singleForm.processed"
       (click)="processFile(singleForm)"
       class="fs-6 fw-semibold text-center ms-auto text-primary"
-      >Process</span
-    >
+      >Process
+    </span>
     <span
       *ngIf="singleForm.processed"
       class="fs-6 fw-semibold delete-btn text-center ms-auto"
@@ -38,20 +38,25 @@
         </button>
       </div>
     </span>
-    -->
-
-    <!--  -->
-
-    <span class="fs-6 fw-semibold delete-btn text-center ms-auto">
-      <div>
-        <span (click)="printContent()" class=""> Print </span>
-      </div>
-    </span>
   </a>
   <div
     class="list-group list-group-flush border-bottom scrollarea mr-auto"
     style="max-height: calc(100vh - 114px); overflow-y: scroll"
   >
+    <!-- print  -->
+    <a
+      *ngIf="!singleForm.processed"
+      href="javascript:void(0)"
+      style="margin-right: 14px"
+      class="form-info-head d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none"
+    >
+      <span class="fs-6 fw-semibold delete-btn text-center ms-auto order-2">
+        <div>
+          <span (click)="printContent()" class=""> Print</span>
+        </div>
+      </span>
+    </a>
+
     <div #printContainer class="container mt-5">
       <div class="row mx-auto align-items-center justify-content-center">
         <div class="col-md-8 mr-auto text-center mb-5">

@@ -90,6 +90,14 @@ app.get("/", (req, res) =>
   res.sendFile(path.resolve("dist/voluntarystrikeoffadmin/index.html"))
 );
 
+app.get("/login", (req, res) =>
+  res.sendFile(path.resolve("dist/voluntarystrikeoffadmin/index.html"))
+);
+
+app.get("/home", (req, res) =>
+  res.sendFile(path.resolve("dist/voluntarystrikeoffadmin/index.html"))
+);
+
 function handleError(res, message, code) {
   console.log("ERROR: " + message);
   res.status(code || 500).json({ error: message });
